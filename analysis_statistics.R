@@ -95,6 +95,25 @@ print(icc_resultT1)
 icc_resultT2 <- icc(icc_dataT2, model = "twoway", type = "agreement", unit = "single")
 print(icc_resultT2)
 
+#Change in absolute theta power from 6 to 12 months
+
+t.test(DB$absolute_powerT2theta,DB$absolute_powerT1theta, paired = TRUE, alternative = "two.sided")
+
+#Change in relative theta from 6 to 12 months
+t.test(DB$relative_powerT2theta,DB$relative_powerT1theta, paired = TRUE, alternative = "two.sided")
+
+#Change in theta modulation index from 6 to 12 months
+t.test(DB$modulation_indexT2theta, DB$modulation_indexT1theta, paired = TRUE, alternative = "two.sided")
+
+#correlation between 6 month and 12 month absolute theta power
+cor.test(DB$absolute_powerT2theta,DB$absolute_powerT1theta, use = "complete.obs", method = "pearson")
+
+#correlation between 6 month and 12 month relative theta power
+cor.test(DB$relative_powerT2theta,DB$relative_powerT1theta, use = "complete.obs", method = "pearson")
+
+#correlation between 6 month and 12 month theta modulation index
+cor.test(DB$modulation_indexT1theta,DB$modulation_indexT2theta, use = "complete.obs", method = "pearson")
+
 # plots for 6 to 12 month changes
 # Plot 1: Absolute theta change from 6 months to 12 months
 
@@ -273,6 +292,35 @@ DB_subset_Language <- DB[, c("ID", "absthetaz", "thetamodulz", "relthetaz",
 DB_clean_Language <- na.omit(DB_subset_Language)
 
 #now for alpha:
+
+#Can we observe overall increase in alpha power over the course of video viewing?
+
+#6 months:
+t.test(DB$modulation_indexT1alpha, mu = 0)
+#12 months:
+t.test(DB$modulation_indexT2alpha, mu = 0)
+
+#Change in absolute alpha power from 6 to 12 months
+
+t.test(DB$absolute_powerT2alpha,DB$absolute_powerT1alpha, paired = TRUE, alternative = "two.sided")
+
+#Change in relative alpha from 6 to 12 months
+t.test(DB$relative_powerT2alpha,DB$relative_powerT1alpha, paired = TRUE, alternative = "two.sided")
+
+#Change in alpha modulation index from 6 to 12 months
+t.test(DB$modulation_indexT2alpha, DB$modulation_indexT1alpha, paired = TRUE, alternative = "two.sided")
+
+#correlation between 6 month and 12 month absolute alpha power
+cor.test(DB$absolute_powerT2alpha,DB$absolute_powerT1alpha, use = "complete.obs", method = "pearson")
+
+#correlation between 6 month and 12 month relative theta power
+cor.test(DB$relative_powerT2alpha,DB$relative_powerT1alpha, use = "complete.obs", method = "pearson")
+
+#correlation between 6 month and 12 month theta modulation index
+cor.test(DB$modulation_indexT1alpha,DB$modulation_indexT2alpha, use = "complete.obs", method = "pearson")
+
+#predicting cognitive outcomes with alpha activity
+
 DB_subset_BayleyA <- DB[, c("ID", "absalphaz", "alphamodulz", "relalphaz", 
                            "Bayley", "Age_at_T3")]
 DB_clean_BayleyA <- na.omit(DB_subset_BayleyA)
